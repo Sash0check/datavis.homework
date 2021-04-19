@@ -3,6 +3,10 @@
     src: url("/fonts/Inter-VariableFont_slnt,wght.ttf") format("ttf");
    }
 
+.bar {
+      fill: #720570;
+    }
+
 body{
     font-family: 'Inter';
     background-color: #fafbff;
@@ -46,7 +50,7 @@ body{
 }
 circle {
     stroke: black;
-    opacity: .7;
+    /*opacity: .7;*/
 }
 .select{
     margin-left: 33px;
@@ -123,4 +127,8 @@ h1{
     border-radius: 50%;
     background: #D4E157;
     cursor: pointer;
+}
+
+.x.axis path {
+  display: none;
 }
