@@ -24,7 +24,7 @@ let rParam = 'gdp';
 let year = '2000';
 let param = 'child-mortality';
 let lineParam = 'child-mortality';
-let highlighted = '';
+let highlighted = null;
 let selected = null;
 
 const x = d3.scaleLinear().range([margin * 2, width - margin]);
@@ -123,18 +123,27 @@ loadData().then(data => {
             .attr("fill", d => colorScale(d['region']));
 
         d3.selectAll('rect').on('click', function (actual, i) {
-            d3.selectAll('rect').attr('opacity', 0.5);
-            d3.select(this).attr('opacity', 1);
-            console.log(actual.region);
-            console.log(scatterPlot.selectAll('circle'));
-            scatterPlot.selectAll('circle').attr('opacity', 0);
-            scatterPlot.selectAll('circle').filter(d => d['region'] == actual.region).attr('opacity', 1);
+            // highlighted = !highlighted;
+            if (highlighted != this) {
+                d3.selectAll('rect').attr('opacity', 0.5);
+                d3.select(this).attr('opacity', 1);
+                console.log(actual.region);
+                console.log(scatterPlot.selectAll('circle'));
+                scatterPlot.selectAll('circle').attr('opacity', 0);
+                scatterPlot.selectAll('circle').filter(d => d['region'] == actual.region).attr('opacity', 1);
+                highlighted = this;
+            }else{
+                d3.selectAll('rect').attr('opacity', 1);
+                scatterPlot.selectAll('circle').attr('opacity', 0.7);
+                highlighted = null;
+            }
+
         });
 
-        barChart.on('mouseleave', function (actual, i) {
-            d3.selectAll('rect').attr('opacity', 1);
-            scatterPlot.selectAll('circle').attr('opacity', 0.7);
-        });
+        // barChart.on('mouseleave', function (actual, i) {
+        //     d3.selectAll('rect').attr('opacity', 1);
+        //     scatterPlot.selectAll('circle').attr('opacity', 0.7);
+        // });
 
         return;
     }
